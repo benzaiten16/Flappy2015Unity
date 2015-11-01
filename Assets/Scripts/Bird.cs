@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Bird : MonoBehaviour {
@@ -22,6 +22,7 @@ public class Bird : MonoBehaviour {
 	AudioSource peow;
 	AudioSource pipe;
 	AudioSource boup;
+	AudioSource tiny;
 
 
 	//Use this for initialization
@@ -39,14 +40,14 @@ public class Bird : MonoBehaviour {
 	    peow = allMyAudioSources[1];
 		pipe = allMyAudioSources[2];
 		boup = allMyAudioSources[3];
-
+		tiny = allMyAudioSources[4];
 	}
 
 	//PowerUp timer to get normal
 	IEnumerator powerUpTimer() {
 
-		//Restore Values after 10'
-		yield return new WaitForSeconds(9F);
+		//Restore Values after 10' LO BAJE A 4
+		yield return new WaitForSeconds(5F);
 
 		//Loosing powerup sound
 		if(hasPlayed == false){
@@ -60,6 +61,19 @@ public class Bird : MonoBehaviour {
 			transform.localScale = new Vector3(6.064453F, 7.314585F, 1F);
 			powerupPosition.x = 1.5F;
 			transform.position -= powerupPosition;
+
+			//Restore mass values
+			vForce.y = -18;
+			vJump.y = 7;
+			maxSpeed = 7;
+		}
+		//For tiny****************
+		if(birdState == states[2]){
+			transform.localScale = new Vector3(6.064453F, 7.314585F, 1F);
+			//powerupPosition.x = 1;
+			powerupPosition.x = 1.5F;
+			//transform.position -= powerupPosition;
+
 
 			//Restore mass values
 			vForce.y = -18;
@@ -184,7 +198,23 @@ public class Bird : MonoBehaviour {
 			//Delay of 0.3ms and then get 2nd size
 			StartCoroutine(waitGrow());
 		}
+		//Tiny Power Up
+		if(Collider.gameObject.name == "TinyPowerUp"){
 
+			//Set tiny state
+			birdState = states[2];
+			hasPlayed= false;
+
+			//Size
+			transform.localScale = new Vector3(4, 4, 1);
+
+			//tiny Sound
+			tiny.Play();
+			//Mass value
+			vForce.y = -14;
+			vJump.y = 5;
+			maxSpeed = 5;
+		}
 	}
 
 }
