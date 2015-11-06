@@ -70,14 +70,30 @@ public class Bird : MonoBehaviour {
 	//Update is called once per frame
 	void Update(){
 		
-		if(Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)){
+		if(Input.GetKeyDown(KeyCode.Space)  || Input.GetMouseButtonDown(0)){
             flap = true;
 
             //bloob sound
             bloob.Play();
         }
-	
-	}
+        // diparando
+        bool disparo = Input.GetButtonDown("Fire1");
+        disparo |= Input.GetButtonDown("Fire2");
+
+        if (birdState == states[3]) { 
+                    if (disparo)
+                    {
+                        ArmaScript arma = GetComponent<ArmaScript>();
+                        if (arma != null)
+                        {
+                            // Falso porque el jugador no es el enemigo
+                            arma.Ataque(false);
+                        }
+                    }
+        }
+
+
+    }
 
 
 	//Update more slow than normal
@@ -128,12 +144,13 @@ public class Bird : MonoBehaviour {
 			Application.LoadLevel(Application.loadedLevel);
 		}
 
-		//Else: Im unstopable bitch, but better if I dont collide with the ground 
+		//Else: Im unstopable bitch, but better if I dont collide with the ground o pagaro mutante
 		else{
 			//peow sound
 			peow.Play();
 
-			if(Collission.gameObject.name == "Ground"){
+			if(Collission.gameObject.name == "Ground" || Collission.gameObject.name == "Mutated_Bird")
+            {
 
 				//Restart Current Scene (Pause?)
 				Application.LoadLevel(Application.loadedLevel);
@@ -179,7 +196,7 @@ public class Bird : MonoBehaviour {
 		maxSpeed = 20;
 	}
 
-
+    
 	//When Trigger with a powerup
 	void OnTriggerEnter2D(Collider2D Collider){;
 		
@@ -216,6 +233,17 @@ public class Bird : MonoBehaviour {
 
 			StartCoroutine(powerUpTimer());
 		}
-	}
+
+
+        //Killer Power Up
+        else if (Collider.gameObject.name == "KillerPowerUp")
+        {
+
+            //Set killer state
+            birdState = states[3];
+            hasPlayed = false;
+                        
+        }
+    }
 
 } //End
