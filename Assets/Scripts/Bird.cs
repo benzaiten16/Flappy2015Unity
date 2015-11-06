@@ -144,7 +144,7 @@ public class Bird : MonoBehaviour {
 			Application.LoadLevel(Application.loadedLevel);
 		}
 
-		//Else: Im unstopable bitch, but better if I dont collide with the ground o pagaro mutante
+		//Else: Im unstopable bitch, but better if I dont collide with the ground o pajaro mutante
 		else{
 			//peow sound
 			peow.Play();
@@ -242,7 +242,8 @@ public class Bird : MonoBehaviour {
             //Set killer state
             birdState = states[3];
             hasPlayed = false;
-                        
+
+            StartCoroutine(powerUpTimer());
         }
     }
 
