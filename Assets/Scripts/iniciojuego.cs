@@ -34,5 +34,6 @@ public class iniciojuego : MonoBehaviour {
 		panelCreditos.enabled = true;
 		panelCreditos.SetBool ("esconder", esconder);
 	}
+
 }
 
