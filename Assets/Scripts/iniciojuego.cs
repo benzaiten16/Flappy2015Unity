@@ -8,6 +8,7 @@ public class iniciojuego : MonoBehaviour {
 	public Animator BotonCreditos;
 	public Animator BotonSalir;
 	public Animator panelOpciones;
+	public Animator panelCreditos;
 
 	public void CambiarEscena (string Main)
 	{
@@ -26,6 +27,12 @@ public class iniciojuego : MonoBehaviour {
 	
 		panelOpciones.enabled = true;
 		panelOpciones.SetBool ("esconder", esconder);
+	}
+
+	public void EsconderCreditos (bool esconder){
+		
+		panelCreditos.enabled = true;
+		panelCreditos.SetBool ("esconder", esconder);
 	}
 
 }
