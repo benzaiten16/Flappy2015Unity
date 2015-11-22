@@ -26,7 +26,7 @@ public class Tubes : MonoBehaviour {
 
         //Scroll
         this.transform.position = this.transform.position + (vSpeed * Time.deltaTime);
- 
+ 		/**
         //Out of camera position
         if (this.transform.position.x <= -8.22f){
 
@@ -42,7 +42,7 @@ public class Tubes : MonoBehaviour {
             //Reset sfx flag
             hasPlayed = false;
         }
-
+		**/
         //Play audio
 		if( (this.transform.position.x <= -5f) && (hasPlayed == false) ){
 			GetComponent<AudioSource>().Play();

@@ -201,7 +201,7 @@ public class Bird : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D Collider){;
 		
 		//Unstopable Power Up
-		if(Collider.gameObject.name == "UnstopablePowerUp"){
+		if(Collider.gameObject.tag == "UnstopablePowerUp"){
 
 			//Set unstopable state to bird
 	    	birdState = states[1];
@@ -217,7 +217,7 @@ public class Bird : MonoBehaviour {
 		}
 
 		//Tiny Power Up
-		else if(Collider.gameObject.name == "TinyPowerUp"){
+		else if(Collider.gameObject.tag == "TinyPowerUp"){
 
 			//Set tiny state
 			birdState = states[2];
@@ -236,7 +236,7 @@ public class Bird : MonoBehaviour {
 
 
         //Killer Power Up
-        else if (Collider.gameObject.name == "KillerPowerUp")
+        else if (Collider.gameObject.tag == "KillerPowerUp") //Chequea por TAG
         {
 
             //Set killer state
