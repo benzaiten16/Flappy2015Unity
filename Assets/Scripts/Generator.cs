@@ -4,8 +4,8 @@ using System.Collections;
 public class Generator : MonoBehaviour {
 
 	public GameObject[] obj;  //Lista objetos a generar
-	public float tiempoMin = 1f;  //Tiempo minimo de lapso
-	public float tiempoMax = 1f;  //Tiempo maximo de lapso
+	//public float tiempoMin = 1.3f;  //Tiempo minimo de lapso para la generacion de tubos
+	//public float tiempoMax = 1.3f;  //Tiempo maximo de lapso para la generacion de tubos
 	public GameObject[] pwr; //Lista de Powerups a generar
 	GameObject tube;
 
@@ -32,6 +32,6 @@ public class Generator : MonoBehaviour {
 	void GenerateTube(){ 
 		//Instancia de nuevo tubo
 		tube = (GameObject)Instantiate ((obj [Random.Range (0, obj.Length)]),new Vector3(8,Random.Range (2.50f, 6.10f),0), (Quaternion.identity)); 
-		Invoke ("GenerateTube", Random.Range (tiempoMin, tiempoMax));
+		Invoke ("GenerateTube", 1.2f);//Random.Range (tiempoMin, tiempoMax));
 	}
 }
