@@ -4,19 +4,57 @@ using System.Collections;
 public class Boss : MonoBehaviour {
 
 	public Transform flappy;
-	Vector3 movement = Vector3.zero;
-	float rotation = 0;
 	public float vidas = 5;
+	
+	Vector3 movement = Vector3.zero;
+	Vector3 attackMovement = Vector3.zero;
+	Vector3 repositionPlace = Vector3.zero;
+
+	AudioSource peow;
+
+	float rotation = 0;
+	float tiempo = 0;
+	float attackSpeed = 1;
+	float xPosOriginal = 4.86f;
+
+	bool ataco = false;
+	bool reposition = false;
 
 
 	// Use this for initialization
 	void Start () {
+		repositionPlace.x = 9.30f;
+		repositionPlace.y = transform.position.y;
+		repositionPlace.z = transform.position.z;
+		
 		movement.y = 3.35f;
 		rotation = Mathf.Lerp (0, -7, 5);
+		attackMovement.x = -9f;
+
+		//Set all audio sources
+    	AudioSource[] allMyAudioSources = GetComponents<AudioSource>();
+	    peow = allMyAudioSources[0];
 	}
 	
-	// Update is called once per frame
-	void Update () {
+
+	void Update(){
+		if(ataco == true){
+			Attack();
+		}
+		else if(reposition == true){
+			Reposition();
+		}
+		else if(Time.time > tiempo){
+			Prepare();
+		}
+		else{
+			Movimiento();
+		}
+	}
+
+
+	void Movimiento(){
+
 		if(transform.position.y >= 3.30f){
 			movement.y = -2.50f;
 			rotation = Mathf.Lerp (0, 2, 5);
@@ -25,14 +63,7 @@ public class Boss : MonoBehaviour {
 			movement.y = 3.35f;
 			rotation = Mathf.Lerp (0, -7, 5);
 		}
-	}
 
-	//Update more slow than normal
-	void FixedUpdate(){
-		Movimiento();
-	}
-
-	void Movimiento(){
 		if(vidas > 3){
 			transform.position += movement * (Time.deltaTime / 1.3f);
 		}
@@ -44,5 +75,63 @@ public class Boss : MonoBehaviour {
 		}
 
 		transform.rotation = Quaternion.Euler(0, 0, rotation);
+	}
+
+
+	void Prepare(){
+		
+		if(this.transform.position.y > 2.10f && this.transform.position.y < 3.70f && flappy.transform.position.y > 1.6f && flappy.transform.position.y < 4.50f){
+			ataco = true;
+		}
+		else if(this.transform.position.y > -0.40f && this.transform.position.y < 1f && flappy.transform.position.y > -1.5f && flappy.transform.position.y < 1.6f){
+			ataco = true;
+		}
+		else if(this.transform.position.y > -2.75f && this.transform.position.y < -0.40f && flappy.transform.position.y > -3.3f && flappy.transform.position.y < -1.5f){
+			ataco = true;
+		}
+		else{
+			tiempo = Time.time + attackSpeed;
+		}
+	}
+
+
+	void Attack(){
+		if(transform.position.x <= attackMovement.x){
+			ataco = false;
+			reposition = true;
+		}
+		else{
+			transform.position += attackMovement * (Time.deltaTime);
+		}
+	}
+
+	void Reposition(){
+		//transform.position = repositionPlace;
+		
+		if(transform.position.x > xPosOriginal){
+			reposition = false;
+			tiempo = Time.time + 7;
+		}
+		else{
+			transform.position -= attackMovement * (Time.deltaTime/2);
+		}
+		
+	}
+
+
+	//When Collide
+	void OnCollisionEnter2D(Collision2D Collission){
+
+		peow.Play();
+
+		//Collide with the sky
+		if(Collission.gameObject.name == "Bala(clone)"){ //Modificar segun el nombre de la bala
+			if(vidas > 1){
+				vidas--;
+			}
+			else{
+				Destroy(gameObject);
+			}
+		}
 	}
 }
