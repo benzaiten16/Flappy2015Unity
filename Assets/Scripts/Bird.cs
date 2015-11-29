@@ -11,9 +11,17 @@ public class Bird : MonoBehaviour {
 	public float jump;
 	public float maxSpeed;
 	public string birdState;
+	public Transform spawnBullet;
+	public GameObject bullet;
+
 
 	bool flap = false;
 	bool hasPlayed = false;
+
+	//Definiciones para bullet
+	private float shootingRate = 0.1f;
+	private	float shootCooldown = 0f;
+	//************************
 
 	string[] states = {"normal", "unstopable", "tiny", "killer"};
 	Vector3 xPosition = Vector3.zero;
@@ -77,23 +85,13 @@ public class Bird : MonoBehaviour {
             bloob.Play();
         }
         // diparando
-        bool disparo = Input.GetButtonDown("Fire1");
-        disparo |= Input.GetButtonDown("Fire2");
-
-        if (birdState == states[3]) { 
-                    if (disparo)
-                    {
-                        ArmaScript arma = GetComponent<ArmaScript>();
-                        if (arma != null)
-                        {
-                            // Falso porque el jugador no es el enemigo
-                            arma.Ataque(false);
-                        }
-                    }
-        }
-
-
-    }
+		if(Input.GetKeyDown(KeyCode.RightArrow)){
+			if (birdState == states[3]) { 
+				Fire ();
+				}
+			}
+	}
+   
 
 
 	//Update more slow than normal
@@ -118,7 +116,19 @@ public class Bird : MonoBehaviour {
 		transform.rotation = Quaternion.Euler(0, 0, rotation);
 	}
 
+void Fire(){
 
+	if (shootCooldown <= 0f){
+			//Get position
+		Vector3 pos = Vector3.zero;
+		pos.x = this.gameObject.transform.position.x;//this.gameObject.transform.position;
+		pos.y = this.gameObject.transform.position.y;
+			//xPosition = this.gameObject.transform.position
+		var cloneBullet = Instantiate (bullet,pos,Quaternion.identity) as GameObject;
+			//cloneBullet.transform.localScale = this.transform.localScale;
+			//  transform.position + new Vector3(0.70f,0,0))  new Vector3(1.3f,4,0)
+	}
+}
 
 /****** COLLISIONS ******/
 
@@ -198,7 +208,7 @@ public class Bird : MonoBehaviour {
 
     
 	//When Trigger with a powerup
-	void OnTriggerEnter2D(Collider2D Collider){;
+	void OnTriggerEnter2D(Collider2D Collider){
 		
 		//Unstopable Power Up
 		if(Collider.gameObject.tag == "UnstopablePowerUp"){

@@ -5,8 +5,9 @@ using System.Collections;
 /// Comportamiento del arma
 /// </summary>
 public class ArmaScript : MonoBehaviour
-{
-
+{	
+	public float speed;
+	Vector3 vSpeed;
     /// <summary>
     /// Componente transform del disparo
     /// </summary>
@@ -24,17 +25,26 @@ public class ArmaScript : MonoBehaviour
     private float tiempoEntreDisparos;
 
     void Start()
-    {
-        tiempoEntreDisparos = 0f;
+	{	vSpeed.x = speed;
+		tiempoEntreDisparos = 0f;
     }
 
     void Update()
     {
-        if (tiempoEntreDisparos > 0)
-        {
-            tiempoEntreDisparos -= Time.deltaTime;
-        }
-    }
+
+		scroll();
+	}
+	
+	
+	//Scroll
+	private void scroll(){
+		this.transform.position = this.transform.position + (vSpeed * Time.deltaTime);
+	}
+        //if (tiempoEntreDisparos > 0)
+        //{
+          //  tiempoEntreDisparos -= Time.deltaTime;
+        //}
+    //}
 
     //--------------------------------
     // Disparando desde otro Script
@@ -53,9 +63,10 @@ public class ArmaScript : MonoBehaviour
             var disparoTransform = Instantiate(disparoReutilizado) as Transform;
 
             // Asignamos una posicion
-            disparoTransform.position = transform.position;
+            //disparoTransform.position = transform.position;
 
-            // Vemos si es fuego enemigo
+				disparoTransform.position = transform.position + (vSpeed * Time.deltaTime);
+			// Vemos si es fuego enemigo
             DisparoScript disparo = disparoTransform.gameObject.GetComponent<DisparoScript>();
             if (disparo != null)
             {
@@ -63,11 +74,11 @@ public class ArmaScript : MonoBehaviour
             }
 
             // Hacemos que se mueva siempre a la derecha
-            MovimientoScript movimiento = disparoTransform.gameObject.GetComponent<MovimientoScript>();
-            if (movimiento != null)
-            {
-                movimiento.direccion = this.transform.right;
-            }
+            //MovimientoScript movimiento = disparoTransform.gameObject.GetComponent<MovimientoScript>();
+            //if (movimiento != null)
+            //{
+            //    movimiento.direccion = this.transform.right;
+            //}
         }
     }
 
