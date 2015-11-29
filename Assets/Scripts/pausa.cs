@@ -5,9 +5,6 @@ public class pausa : MonoBehaviour {
 	bool pausado = false;
 	// Use this for initialization
 	void Start () {
-
-		
-
 	
 	}
 	
@@ -29,7 +26,8 @@ public class pausa : MonoBehaviour {
 		
 	} 
 	
-	
+
+
 	void OnGUI(){ 
 		
 		if(pausado){ 
@@ -39,10 +37,12 @@ public class pausa : MonoBehaviour {
 			
 			if(GUI.Button(new Rect(Screen.width/2-100,(Screen.height/2)-0,200,50),"Reiniciar juego")){ 
 				Application.LoadLevel("Main"); 
+				Time.timeScale = 1; 
 			} 
 			
 			if(GUI.Button(new Rect(Screen.width/2-100,(Screen.height/2)-50,200,50),"Menu Principal")){ 
 				Application.LoadLevel("Menues");
+				Time.timeScale = 1; 
 			} 
 			
 			if(GUI.Button(new Rect(Screen.width/2-100,(Screen.height/2)-100,200,50),"Salir")){ 
