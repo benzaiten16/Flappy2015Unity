@@ -5,7 +5,7 @@ public class pausa : MonoBehaviour {
 	bool pausado = false;
 	// Use this for initialization
 	void Start () {
-	
+
 	}
 	
 	// Update is called once per frame
@@ -31,6 +31,7 @@ public class pausa : MonoBehaviour {
 	void OnGUI(){ 
 		
 		if(pausado){ 
+			Time.timeScale = 0; 
 			Cursor.visible = true; 
 			GUI.Box(new Rect(0,0,Screen.width,Screen.height),"PAUSA"); 
 			GUI.backgroundColor = Color.blue; 
