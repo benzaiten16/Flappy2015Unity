@@ -9,18 +9,19 @@ public class Tubes : MonoBehaviour {
 
     public float speed;
     public float distance;
-	public bool arranca = false;
+	//public bool arranca = false; **********************************1
 
 	// Use this for initialization
 	void Start(){
 		vSpeed.x = speed;
 		vDistance.x = distance;
-		Time.timeScale = 0;
+		//Time.timeScale = 0; ***********************************2
 	}
 	
 	// Update is called once per frame
 	void Update(){
-
+		scrollTubes ();
+		/*
 			if(Input.GetKeyDown(KeyCode.Space)  || Input.GetMouseButtonDown(0)){
 			//Time.timeScale = 0;
 				arranca = true;
@@ -28,7 +29,7 @@ public class Tubes : MonoBehaviour {
 		if (arranca) {
 			Time.timeScale = 1;
 			scrollTubes ();
-		}
+		}*/
 	}
 
 
