@@ -19,10 +19,12 @@ public class Boss : MonoBehaviour {
 
 	bool ataco = false;
 	bool reposition = false;
+	bool arranca = false;
 
 
 	// Use this for initialization
 	void Start () {
+		Time.timeScale = 0;
 		repositionPlace.x = 9.30f;
 		repositionPlace.y = transform.position.y;
 		repositionPlace.z = transform.position.z;
@@ -38,17 +40,21 @@ public class Boss : MonoBehaviour {
 	
 
 	void Update(){
-		if(ataco == true){
-			Attack();
+		if (Input.GetKeyDown (KeyCode.Space) || Input.GetMouseButtonDown (0)) {
+			//Time.timeScale = 0;
+			arranca = true;
 		}
-		else if(reposition == true){
-			Reposition();
-		}
-		else if(Time.time > tiempo){
-			Prepare();
-		}
-		else{
-			Movimiento();
+		if (arranca) {
+			Time.timeScale = 1;
+			if (ataco == true) {
+				Attack ();
+			} else if (reposition == true) {
+				Reposition ();
+			} else if (Time.time > tiempo) {
+				Prepare ();
+			} else {
+				Movimiento ();
+			}
 		}
 	}
 
