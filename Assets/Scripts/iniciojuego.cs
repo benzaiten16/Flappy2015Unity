@@ -10,6 +10,10 @@ public class iniciojuego : MonoBehaviour {
 	public Animator panelOpciones;
 	public Animator panelCreditos;
 
+	void Start () {
+		Time.timeScale = 1;
+	}
+
 	public void CambiarEscena (string Main)
 	{
 		Application.LoadLevel (Main); 
