@@ -36,6 +36,9 @@ public class Boss : MonoBehaviour {
 		//Set all audio sources
     	AudioSource[] allMyAudioSources = GetComponents<AudioSource>();
 	    peow = allMyAudioSources[0];
+
+		//seteo al bird en estado Killer
+		//Cri cri
 	}
 	
 
@@ -131,7 +134,7 @@ public class Boss : MonoBehaviour {
 		peow.Play();
 
 		//Collide with the sky
-		if(Collission.gameObject.name == "Bala(clone)"){ //Modificar segun el nombre de la bala
+		if(Collission.gameObject.tag == "Bullet"){ 
 			if(vidas > 1){
 				vidas--;
 			}

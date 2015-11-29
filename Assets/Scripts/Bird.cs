@@ -121,7 +121,7 @@ void Fire(){
 	if (shootCooldown <= 0f){
 			//Get position
 		Vector3 pos = Vector3.zero;
-		pos.x = this.gameObject.transform.position.x;//this.gameObject.transform.position;
+		pos.x = this.gameObject.transform.position.x + 1;//this.gameObject.transform.position;
 		pos.y = this.gameObject.transform.position.y;
 			//xPosition = this.gameObject.transform.position
 		var cloneBullet = Instantiate (bullet,pos,Quaternion.identity) as GameObject;

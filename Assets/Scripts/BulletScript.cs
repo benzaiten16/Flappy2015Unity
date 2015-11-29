@@ -9,12 +9,16 @@ public class BulletScript : MonoBehaviour {
 
 		rbBullet = GetComponent<Rigidbody2D>();
 		rbBullet.velocity = speed * this.transform.localScale.x;
-		Destroy (gameObject, 3.5f);
+		Destroy (gameObject, 3);
 	
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
+	}
+	//When Collide
+	void OnCollisionEnter2D(Collision2D Collission){
+		Destroy (gameObject);
 	}
 }
