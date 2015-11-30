@@ -68,10 +68,19 @@ public class Bird : MonoBehaviour {
 	    peow = allMyAudioSources[1];
 		pipe = allMyAudioSources[2];
 		boup = allMyAudioSources[3];
+		print (Application.loadedLevelName);
+		//Set state according scene
+		if (Application.loadedLevelName == "Final") {
+			birdState = states[3];
+		} 
+		else {
+			//Set bird
+			setBirdToNormal();
 
-		//Set bird
-		setBirdToNormal();
+		}
+
 	}
+
 
 
 
@@ -144,9 +153,16 @@ void Fire(){
 			Vector3 falling = new Vector3(0,3.0F,0);
 			speed.y = -falling.y;
 		}
+		//Collide with his bullet
+		if (Collission.gameObject.tag =="Bullet")
+		{
+			//Esta mal que colisione con la bala,lo dejo por mientras sacar despues******************
+		}
+
 
 		//Or Im not unstopable and I collide with the rest
 		else if( birdState != states[1] ){
+
 			//peow sound
 			peow.Play();
 
