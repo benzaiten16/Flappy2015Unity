@@ -39,6 +39,8 @@ public class Boss : MonoBehaviour {
 
 		//seteo al bird en estado Killer
 		//Cri cri
+
+
 	}
 	
 
