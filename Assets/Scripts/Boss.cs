@@ -5,6 +5,7 @@ public class Boss : MonoBehaviour {
 
 	public Transform flappy;
 	public float vidas = 5;
+	public GameObject explotion;
 	
 	Vector3 movement = Vector3.zero;
 	Vector3 attackMovement = Vector3.zero;
@@ -141,6 +142,7 @@ public class Boss : MonoBehaviour {
 				vidas--;
 			}
 			else{
+				Instantiate(explotion,transform.position,(Quaternion.identity));
 				Destroy(gameObject);
 			}
 		}
