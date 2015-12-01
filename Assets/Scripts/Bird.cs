@@ -21,7 +21,7 @@ public class Bird : MonoBehaviour {
 	bool hasPlayed = false;
 
 	//Definiciones para bullet
-	private float shootingRate = 0.1f;
+	//private float shootingRate = 0.1f;
 	private	float shootCooldown = 0f;
 	//************************
 
@@ -176,7 +176,7 @@ void Fire(){
 			puntuacionScript.resetPunt();
 
 			//Restart Current Scene (Pause?)
-			Application.LoadLevel("Main");
+			Application.LoadLevel("gameover");
 		}
 
 		//Else: Im unstopable bitch, but better if I dont collide with the ground o pajaro mutante
@@ -190,7 +190,7 @@ void Fire(){
 				puntuacionScript.resetPunt();
 
 				//Restart Current Scene (Pause?)
-				Application.LoadLevel("Main");
+				Application.LoadLevel("gameover");
 			}
 		}
 

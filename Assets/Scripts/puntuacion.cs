@@ -23,7 +23,7 @@ public class puntuacion : MonoBehaviour {
 	}
 
 	public void sumarUno(){
-		if(punt > 3){
+		if(punt > 20){
 			Application.LoadLevel("Final");
 		}
 		else{
