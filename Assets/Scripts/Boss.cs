@@ -23,6 +23,8 @@ public class Boss : MonoBehaviour {
 	bool arranca = false;
 
 
+
+
 	// Use this for initialization
 	void Start () {
 		Time.timeScale = 0;
@@ -42,6 +44,7 @@ public class Boss : MonoBehaviour {
 		//Cri cri
 
 
+
 	}
 	
 
@@ -52,6 +55,8 @@ public class Boss : MonoBehaviour {
 			//Time.timeScale = 0;
 			arranca = true;
 		}
+		
+
 		if (arranca) {
 			Time.timeScale = 1;
 			if (ataco == true) {
@@ -64,16 +69,8 @@ public class Boss : MonoBehaviour {
 				Movimiento ();
 			}
 		}
-		if (vidas == 0) {
 
-			OnGUI();
-		}
-		/*	else{
-			OnGUI1();
-			
-		}*/
-
-		Debug.Log (vidas);
+		//Debug.Log (vidas);
 
 	}
 
@@ -155,10 +152,11 @@ public class Boss : MonoBehaviour {
 		if(Collission.gameObject.tag == "Bullet"){ 
 			if(vidas > 1){
 				vidas--;
+
 			}
 			else{
 				Instantiate(explotion,transform.position,(Quaternion.identity));
-				Destroy(gameObject);
+				Destroy(gameObject); 	
 
 			}
 
@@ -167,13 +165,13 @@ public class Boss : MonoBehaviour {
 
 	void OnGUI(){ 
 		
-		if(vidas == 1){ 
+		if(vidas < 1){ 
 		//Time.timeScale = 0.30f; 
 		//Cursor.visible = true; 
 		GUI.Box(new Rect(0,0,Screen.width,Screen.height),"Felicitaciones"); 
 		GUI.Box(new Rect(0,100,Screen.width,Screen.height),"You WIN"); 
 		GUI.backgroundColor = Color.green; 
-			Time.timeScale = 0.30f; 
+
 		if(GUI.Button(new Rect(Screen.width/2-100,(Screen.height/2)-0,200,50),"Reiniciar juego")){ 
 			Application.LoadLevel("Main"); 
 			Time.timeScale = 1; 
@@ -189,8 +187,9 @@ public class Boss : MonoBehaviour {
 		} 
 		
 		} 
-		
+
 	} 
+
 	/* Para cuando pierde*/ // Hay q ver cual es el descencadenante
 	/*void OnGUI1(){ 
 		
