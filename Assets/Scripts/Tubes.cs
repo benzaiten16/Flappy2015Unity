@@ -20,6 +20,7 @@ public class Tubes : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update(){
+		//Time.timeScale = 1;
 		scrollTubes (); //Para como estaba antes hay que descomentar esto 3
 		/*********************************** 4 comento
 			if(Input.GetKeyDown(KeyCode.Space)  || Input.GetMouseButtonDown(0)){

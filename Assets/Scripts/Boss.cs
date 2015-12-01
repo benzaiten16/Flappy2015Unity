@@ -46,6 +46,8 @@ public class Boss : MonoBehaviour {
 	
 
 	void Update(){
+
+
 		if (Input.GetKeyDown (KeyCode.Space) || Input.GetMouseButtonDown (0)) {
 			//Time.timeScale = 0;
 			arranca = true;
@@ -62,7 +64,19 @@ public class Boss : MonoBehaviour {
 				Movimiento ();
 			}
 		}
+		if (vidas == 0) {
+
+			OnGUI();
+		}
+		/*	else{
+			OnGUI1();
+			
+		}*/
+
+		Debug.Log (vidas);
+
 	}
+
 
 
 	void Movimiento(){
@@ -131,6 +145,7 @@ public class Boss : MonoBehaviour {
 	}
 
 
+
 	//When Collide
 	void OnCollisionEnter2D(Collision2D Collission){
 
@@ -144,7 +159,64 @@ public class Boss : MonoBehaviour {
 			else{
 				Instantiate(explotion,transform.position,(Quaternion.identity));
 				Destroy(gameObject);
+
 			}
+
 		}
 	}
+
+	void OnGUI(){ 
+		
+		if(vidas == 1){ 
+		//Time.timeScale = 0.30f; 
+		//Cursor.visible = true; 
+		GUI.Box(new Rect(0,0,Screen.width,Screen.height),"Felicitaciones"); 
+		GUI.Box(new Rect(0,100,Screen.width,Screen.height),"You WIN"); 
+		GUI.backgroundColor = Color.green; 
+			Time.timeScale = 0.30f; 
+		if(GUI.Button(new Rect(Screen.width/2-100,(Screen.height/2)-0,200,50),"Reiniciar juego")){ 
+			Application.LoadLevel("Main"); 
+			Time.timeScale = 1; 
+		} 
+		
+		if(GUI.Button(new Rect(Screen.width/2-100,(Screen.height/2)-50,200,50),"Menu Principal")){ 
+			Application.LoadLevel("Menues");
+			Time.timeScale = 1; 
+		} 
+		
+		if(GUI.Button(new Rect(Screen.width/2-100,(Screen.height/2)-100,200,50),"Salir")){ 
+			Application.Quit(); 
+		} 
+		
+		} 
+		
+	} 
+	/* Para cuando pierde*/ // Hay q ver cual es el descencadenante
+	/*void OnGUI1(){ 
+		
+		//if(vidas <= 1){ 
+			Time.timeScale = 0.30f; 
+			//Cursor.visible = true; 
+			GUI.Box(new Rect(0,0,Screen.width,Screen.height),"Lo siento!"); 
+			GUI.Box(new Rect(0,100,Screen.width,Screen.height),"You LOSE"); 
+			GUI.backgroundColor = Color.red; 
+			
+			if(GUI.Button(new Rect(Screen.width/2-100,(Screen.height/2)-0,200,50),"Reiniciar juego")){ 
+				Application.LoadLevel("Main"); 
+				Time.timeScale = 1; 
+			} 
+			
+			if(GUI.Button(new Rect(Screen.width/2-100,(Screen.height/2)-50,200,50),"Menu Principal")){ 
+				Application.LoadLevel("Menues");
+				Time.timeScale = 1; 
+			} 
+			
+			if(GUI.Button(new Rect(Screen.width/2-100,(Screen.height/2)-100,200,50),"Salir")){ 
+				Application.Quit(); 
+			} 
+			
+		//} 
+		
+	} */
+
 }
