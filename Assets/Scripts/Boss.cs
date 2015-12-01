@@ -6,6 +6,9 @@ public class Boss : MonoBehaviour {
 	public Transform flappy;
 	public float vidas = 5;
 	public GameObject explotion;
+
+	public GameObject objetoPuntuacion;
+    private puntuacion puntuacionScript;
 	
 	Vector3 movement = Vector3.zero;
 	Vector3 attackMovement = Vector3.zero;
@@ -27,6 +30,10 @@ public class Boss : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+		//get script de puntuacion
+		puntuacionScript = objetoPuntuacion.GetComponent<puntuacion>();
+
 		Time.timeScale = 0;
 		repositionPlace.x = 9.30f;
 		repositionPlace.y = transform.position.y;
@@ -155,6 +162,7 @@ public class Boss : MonoBehaviour {
 
 			}
 			else{
+				puntuacionScript.sumarBoss();
 				Instantiate(explotion,transform.position,(Quaternion.identity));
 				Destroy(gameObject); 	
 

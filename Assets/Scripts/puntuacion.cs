@@ -4,21 +4,26 @@ using UnityEngine.UI;
 
 public class puntuacion : MonoBehaviour {
 	
+	public static puntuacion instanciaPuntuacion;
 	public float punt = 0;
 	GameObject myTextgameObject;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+	void Awake(){
+		if(instanciaPuntuacion == null){
+			instanciaPuntuacion = this;
+			DontDestroyOnLoad(gameObject);
+		}
+		else if(instanciaPuntuacion != this){
+			Destroy(gameObject);
+		}
+
+		//Seteo el score actual
+		myTextgameObject = GameObject.Find("Score");
+		myTextgameObject.GetComponent<TextMesh>().text = punt.ToString();
 	}
 
 	public void sumarUno(){
-		if(punt > 10){
+		if(punt > 3){
 			Application.LoadLevel("Final");
 		}
 		else{
@@ -30,6 +35,12 @@ public class puntuacion : MonoBehaviour {
 
 	public void resetPunt(){
 		punt = 0;
+		myTextgameObject = GameObject.Find("Score");
+		myTextgameObject.GetComponent<TextMesh>().text = punt.ToString();
+	}
+
+	public void sumarBoss(){
+		punt = punt + 50;
 		myTextgameObject = GameObject.Find("Score");
 		myTextgameObject.GetComponent<TextMesh>().text = punt.ToString();
 	}

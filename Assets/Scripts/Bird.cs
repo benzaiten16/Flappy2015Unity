@@ -67,8 +67,6 @@ public class Bird : MonoBehaviour {
     	//get script de puntuacion
 		puntuacionScript = objetoPuntuacion.GetComponent<puntuacion>();
 
-		//reseteo la puntuacion
-		puntuacionScript.resetPunt();
 
     	//Set all audio sources
     	AudioSource[] allMyAudioSources = GetComponents<AudioSource>();
@@ -174,8 +172,11 @@ void Fire(){
 			//peow sound
 			peow.Play();
 
+			//reseteo la puntuacion
+			puntuacionScript.resetPunt();
+
 			//Restart Current Scene (Pause?)
-			Application.LoadLevel(Application.loadedLevel);
+			Application.LoadLevel("Main");
 		}
 
 		//Else: Im unstopable bitch, but better if I dont collide with the ground o pajaro mutante
@@ -185,8 +186,11 @@ void Fire(){
 
 			if(Collission.gameObject.name == "Ground" || Collission.gameObject.name == "Mutated_Bird")
             {
+            	//reseteo la puntuacion
+				puntuacionScript.resetPunt();
+
 				//Restart Current Scene (Pause?)
-				Application.LoadLevel(Application.loadedLevel);
+				Application.LoadLevel("Main");
 			}
 		}
 
