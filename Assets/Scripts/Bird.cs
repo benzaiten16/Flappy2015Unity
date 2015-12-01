@@ -14,6 +14,8 @@ public class Bird : MonoBehaviour {
 	public Transform spawnBullet;
 	public GameObject bullet;
 
+	public GameObject objetoPuntuacion;
+    private puntuacion puntuacionScript;
 
 	bool flap = false;
 	bool hasPlayed = false;
@@ -61,6 +63,12 @@ public class Bird : MonoBehaviour {
 		//Set thhe public vars
     	vForce.y = force;
     	vJump.y = jump;
+
+    	//get script de puntuacion
+		puntuacionScript = objetoPuntuacion.GetComponent<puntuacion>();
+
+		//reseteo la puntuacion
+		puntuacionScript.resetPunt();
 
     	//Set all audio sources
     	AudioSource[] allMyAudioSources = GetComponents<AudioSource>();
@@ -177,7 +185,6 @@ void Fire(){
 
 			if(Collission.gameObject.name == "Ground" || Collission.gameObject.name == "Mutated_Bird")
             {
-
 				//Restart Current Scene (Pause?)
 				Application.LoadLevel(Application.loadedLevel);
 			}

@@ -7,12 +7,20 @@ public class Tubes : MonoBehaviour {
     Vector3 vDistance;
     bool hasPlayed = false;
 
+
+    public GameObject objetoPuntuacion;
+    private puntuacion puntuacionScript;
+
     public float speed;
     public float distance;
 	//public bool arranca = false; **********************************1 comento
 
 	// Use this for initialization
-	void Start(){
+	void Start(){ 
+
+		//get script de puntuacion
+		puntuacionScript = objetoPuntuacion.GetComponent<puntuacion>();
+		
 		vSpeed.x = speed;
 		vDistance.x = distance;
 		//Time.timeScale = 0; ***********************************2 comento
@@ -60,6 +68,9 @@ public class Tubes : MonoBehaviour {
 		if( (this.transform.position.x <= -5f) && (hasPlayed == false) ){
 			GetComponent<AudioSource>().Play();
 			hasPlayed = true;
+
+			
+			puntuacionScript.sumarUno();
         }
 
     }
@@ -81,6 +92,7 @@ public class Tubes : MonoBehaviour {
 
 		//Destroy when bird is unstopable
 		if(bird.birdState == "unstopable"){
+			puntuacionScript.sumarUno();
 			StartCoroutine(detroyTube());
         }
 
